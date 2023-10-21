@@ -1,14 +1,16 @@
+import { CSSProperties } from "react"
+
 export function FormSubmit({
     label = 'Enviar',
-    className
+    style
 }: {
     label?: string
-    className?: string
+    style?: CSSProperties
 }): JSX.Element {
     return (
         <button
             type="submit"
-            className={className}
+            style={style}
         >
             {label}
         </button>

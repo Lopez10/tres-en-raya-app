@@ -1,25 +1,26 @@
+import { CSSProperties } from "react"
 import { FormSubmit } from "./FormSubmit"
 
 export function Form({
     children,
     onSubmit,
-    className,
-    submitClassName,
+    style,
+    submitStyle,
     submitLabel,
     id,
 }: {
     children: JSX.Element | JSX.Element[]
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-    className?: string
-    submitClassName?: string
+    style?: CSSProperties
+    submitStyle?: CSSProperties
     submitLabel?: string
     id?: string
 }): JSX.Element {
     return (
-        <form className={className} onSubmit={onSubmit} id={id}>
+        <form style={style} onSubmit={onSubmit} id={id}>
             {children}
             <FormSubmit
-                className={submitClassName}
+                style={submitStyle}
                 label={submitLabel}
             />
         </form>

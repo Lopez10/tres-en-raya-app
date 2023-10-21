@@ -12,7 +12,11 @@ export function NewPlayerForm({
         setUsername(event.target.value);
     }
     return (
-        <Form onSubmit={onSubmit} submitLabel="Acceder">
+        <Form onSubmit={onSubmit} submitLabel="Acceder" style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+        }}>
             <Input
                 label="Nombre de usuario"
                 type="text"

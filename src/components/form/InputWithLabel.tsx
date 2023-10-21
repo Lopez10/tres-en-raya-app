@@ -1,3 +1,5 @@
+import { CSSProperties } from "react"
+
 export function Input({
     label,
     name,
@@ -5,7 +7,7 @@ export function Input({
     onChange,
     type,
     placeholder,
-    className,
+    style,
     id,
     disabled,
     required
@@ -16,7 +18,7 @@ export function Input({
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     type?: string
     placeholder?: string
-    className?: string
+    style?: CSSProperties
     id?: string
     disabled?: boolean
     required?: boolean
@@ -30,7 +32,7 @@ export function Input({
                 onChange={onChange}
                 type={type}
                 placeholder={placeholder}
-                className={className}
+                style={style}
                 id={id}
                 disabled={disabled}
                 required={required}
