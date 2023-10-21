@@ -1,3 +1,5 @@
+import { post } from "./services.common";
+
 export type Player = {
     id: string;
     username: string;
@@ -5,3 +7,5 @@ export type Player = {
     losses: number;
     draws: number;
 };
+
+export const newPlayer = (username: string) => post('/players', { username })
