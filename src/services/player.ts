@@ -8,4 +8,12 @@ export type Player = {
     draws: number;
 };
 
+export const emptyPlayer: Player = {
+    id: '',
+    username: '',
+    wins: 0,
+    losses: 0,
+    draws: 0,
+};
+
 export const newPlayer = (username: string) => post('http://localhost:3000/players', { username })
