@@ -3,28 +3,38 @@ import { Square } from "./Square";
 
 export function Board({
     onClickSquare,
-    squaresBoard = Array(9).fill('')
+    squaresBoard = Array(9).fill(''),
+    disabled = false
 }: {
-    onClickSquare: (board: string[]) => void;
+    onClickSquare: (board: string[]) => Promise<string[]>;
     squaresBoard?: Array<string>;
+    disabled?: boolean;
 }): JSX.Element {
     const [squares, setSquares] = useState(squaresBoard);
 
-    function handleClick(index: number): void {
-        const nextSquares = squares.slice();
-        nextSquares[index] = "X";
-        setSquares(nextSquares);
-        onClickSquare(nextSquares);
+    async function handleClick(index: number): Promise<void> {
+        const boardUpdated = squares.slice();
+        boardUpdated[index] = "X";
+        setSquares(boardUpdated);
+        nextMove(boardUpdated);
+    }
+
+    async function nextMove(boardUpdated: string[]): Promise<void> {
+        const moveResponse = await onClickSquare(boardUpdated);
+        setSquares(moveResponse);
     }
 
     return (
-        <div style={gameStyle}>
+        <div
+            style={gameStyle}
+        >
             {
                 squares.map((square, index) => (
                     <Square
+                        key={index}
                         children={square}
                         onClick={() => handleClick(index)}
-                        disabled={false}
+                        disabled={square !== '' || disabled}
                     />
                 ))
             }
