@@ -3,17 +3,23 @@ import { Form } from "../form/Form";
 import { Input } from "../form/InputWithLabel";
 
 export function NewPlayerForm({
-    onSubmit,
+    onNewPlayer,
 }: {
-    onSubmit: () => void
+    onNewPlayer: (username: string) => void
 }): JSX.Element {
     const [username, setUsername] = useState("");
-    const handleUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    function handleUsername(event: React.ChangeEvent<HTMLInputElement>) {
         setUsername(event.target.value);
     }
+
+    function onFormClick() {
+        onNewPlayer(username);
+    }
+
     return (
         <Form
-            onSubmit={onSubmit}
+            onClick={onFormClick}
             style={formStyle}
             submitLabel="Acceder"
             submitStyle={{
