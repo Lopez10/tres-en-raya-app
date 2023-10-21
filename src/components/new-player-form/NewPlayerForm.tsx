@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { Form } from "../form/Form";
 import { Input } from "../form/InputWithLabel";
 
@@ -12,20 +12,46 @@ export function NewPlayerForm({
         setUsername(event.target.value);
     }
     return (
-        <Form onSubmit={onSubmit} submitLabel="Acceder" style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-        }}>
+        <Form
+            onSubmit={onSubmit}
+            style={formStyle}
+            submitLabel="Acceder"
+            submitStyle={{
+                marginTop: "12px",
+                width: "100px",
+            }}>
             <Input
-                label="Nombre de usuario"
                 type="text"
                 name="username"
                 value={username}
                 onChange={handleUsername}
                 required={true}
-                placeholder="Introduce tu nombre de usuario"
+                placeholder="Escribe aquí tu nombre de usuario"
+                inputStyle={inputStyle}
+                label="¿Cual es tu nombre de usuario?"
+                labelStyle={labelStyle}
             />
         </Form>
     )
+}
+
+const formStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    width: "100%",
+}
+
+const inputStyle: CSSProperties = {
+    padding: "20px",
+    border: 'none',
+    borderBottom: "1px solid #ccc",
+    backgroundColor: "#242424",
+    fontSize: "20px",
+}
+
+const labelStyle: CSSProperties = {
+    paddingBottom: "16px",
+    fontWeight: "bold",
+    fontSize: "32px",
 }

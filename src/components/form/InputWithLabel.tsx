@@ -7,10 +7,11 @@ export function Input({
     onChange,
     type,
     placeholder,
-    style,
+    inputStyle,
     id,
     disabled,
-    required
+    required,
+    labelStyle,
 }: {
     label: string
     name: string
@@ -18,21 +19,22 @@ export function Input({
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     type?: string
     placeholder?: string
-    style?: CSSProperties
+    inputStyle?: CSSProperties
     id?: string
     disabled?: boolean
     required?: boolean
+    labelStyle?: CSSProperties
 }): JSX.Element {
     return (
         <>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name} style={labelStyle}>{label}</label>
             <input
                 name={name}
                 value={value}
                 onChange={onChange}
                 type={type}
                 placeholder={placeholder}
-                style={style}
+                style={inputStyle}
                 id={id}
                 disabled={disabled}
                 required={required}
