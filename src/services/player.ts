@@ -8,4 +8,4 @@ export type Player = {
     draws: number;
 };
 
-export const newPlayer = (username: string) => post('/players', { username })
+export const newPlayer = (username: string) => post('http://localhost:3000/players', { username })
