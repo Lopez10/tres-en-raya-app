@@ -6,6 +6,7 @@ import { getPlayer } from "../storage";
 
 export function Game(): JSX.Element {
     const [game, setGame] = useState<IGame>(emptyGame);
+    const [alert, setAlert] = useState<string>('');
     const [disabled, setDisabled] = useState<boolean>(false);
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export function Game(): JSX.Element {
     useEffect(() => {
         if (game.winner) {
             setDisabled(true);
-            alert(`${game.winner} won!`);
+            setAlert(`${game.winner} won!`);
         }
     }, [game.winner]);
 
@@ -39,7 +40,7 @@ export function Game(): JSX.Element {
     }
 
     return (
-        <Container title='Game'>
+        <Container title='Game' alert={alert}>
             <Board
                 disabled={disabled}
                 onClickSquare={handleClickSquare}
