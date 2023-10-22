@@ -53,6 +53,7 @@ const inputStyle: CSSProperties = {
     border: 'none',
     borderBottom: "1px solid #ccc",
     backgroundColor: "#242424",
+    color: "#fff",
     fontSize: "20px",
 }
 
