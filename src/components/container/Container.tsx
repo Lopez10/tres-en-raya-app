@@ -1,14 +1,18 @@
 import { CSSProperties } from "react";
+import { Alert } from "./Alert";
 
 export function Container({
     children,
     title,
+    alert
 }: {
     children: React.ReactNode,
     title: string,
+    alert?: string
 }): JSX.Element {
     return (
         <div style={containerStyle}>
+            {alert && <Alert message={alert} />}
             <h1 style={titleStyle}>{title}</h1>
             <div >
                 {children}
