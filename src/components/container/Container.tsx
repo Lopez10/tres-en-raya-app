@@ -4,15 +4,17 @@ import { Alert } from "./Alert";
 export function Container({
     children,
     title,
-    alert
+    alert,
+    alertOnClose
 }: {
     children: React.ReactNode,
     title: string,
     alert?: string
+    alertOnClose?: () => void
 }): JSX.Element {
     return (
         <div style={containerStyle}>
-            {alert && <Alert message={alert} />}
+            {alert && <Alert message={alert} buttonMessage="Close" onClick={alertOnClose} />}
             <h1 style={titleStyle}>{title}</h1>
             <div >
                 {children}

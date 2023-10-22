@@ -8,6 +8,7 @@ export function Game(): JSX.Element {
     const [game, setGame] = useState<IGame>(emptyGame);
     const [alert, setAlert] = useState<string>('');
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [closeWinner, setCloseWinner] = useState<boolean>(false);
 
     useEffect(() => {
         async function fetchGame() {
@@ -16,10 +17,11 @@ export function Game(): JSX.Element {
                 const gameCreated: IGame = await createGame(player.id);
                 setGame(gameCreated);
             }
+            setCloseWinner(false);
         }
 
         fetchGame();
-    }, []);
+    }, [closeWinner]);
 
     useEffect(() => {
         if (game.winner) {
@@ -39,9 +41,16 @@ export function Game(): JSX.Element {
         return gameUpdated.board;
     }
 
+    function restartGame() {
+        setCloseWinner(true);
+        setDisabled(false);
+        setAlert('')
+    }
+
     return (
-        <Container title='Game' alert={alert}>
+        <Container title='Game' alert={alert} alertOnClose={restartGame} >
             <Board
+                key={game.id}
                 disabled={disabled}
                 onClickSquare={handleClickSquare}
                 squaresBoard={game.board}
