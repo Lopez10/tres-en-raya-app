@@ -15,11 +15,8 @@ export function Game(): JSX.Element {
 
     useEffect(() => {
         if (game.status === 'FINISHED') {
-            if (game.winner) {
-                setAlert(`${game.winner} is the winner!`);
-            } else {
-                setAlert('Draw!');
-            }
+            const alertText = game.winner ? `${game.winner} is the winner!` : 'Draw!'
+            setAlert(alertText);
             setOpenWinnerAlert(true);
         }
     }, [game.status, game.winner]);
