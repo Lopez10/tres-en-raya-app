@@ -18,6 +18,6 @@ export const emptyGame: Game = {
     turn: ''
 };
 
-export const createGame = (playerId: string) => post('http://localhost:3000/games', { playerId })
+export const createGame = (username: string) => post('http://localhost:3000/games', { username })
 
 export const moveBoard = (game: Game) => post('http://localhost:3000/games/move', { ...game })

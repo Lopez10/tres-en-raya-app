@@ -24,7 +24,7 @@ export function Game(): JSX.Element {
     async function fetchGame() {
         const player = getPlayer();
         if (player) {
-            const gameCreated: IGame = await createGame(player.id);
+            const gameCreated: IGame = await createGame(player.username);
             setGame(gameCreated);
         }
     }
