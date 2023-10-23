@@ -3,33 +3,24 @@ import { Alert } from "./Alert";
 
 export function Container({
     children,
-    title,
     openAlert = false,
     alert = '',
-    alertOnClose
+    alertOnClose,
 }: {
     children: React.ReactNode,
-    title: string,
     openAlert?: boolean
     alert?: string
     alertOnClose?: () => void
 }): JSX.Element {
+
     return (
         <div style={containerStyle}>
             {openAlert && <Alert message={alert} buttonMessage="Close" onClick={alertOnClose} />}
-            <h1 style={titleStyle}>{title}</h1>
             <div >
                 {children}
             </div>
         </div>
     )
-}
-
-const titleStyle: CSSProperties = {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    marginBottom: "1rem",
-    textAlign: "center",
 }
 
 const containerStyle: CSSProperties = {
@@ -38,5 +29,5 @@ const containerStyle: CSSProperties = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "10rem",
+    paddingTop: '10rem'
 }

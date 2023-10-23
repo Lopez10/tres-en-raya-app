@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "../components/container/Container";
-import { Player, emptyPlayer } from "../services/player";
+import { Player, emptyPlayer, newPlayer } from "../services/player";
 import { getPlayer } from "../storage";
 
 export function Ranking(): JSX.Element {
@@ -9,12 +9,20 @@ export function Ranking(): JSX.Element {
     useEffect(() => {
         const playerStorage = getPlayer();
         if (playerStorage) {
-            setPlayer(playerStorage);
+            fetchPlayer()
         }
     }, []);
 
+    async function fetchPlayer() {
+        const player = getPlayer();
+        if (player) {
+            const playerCreated: Player = await newPlayer(player.username);
+            setPlayer(playerCreated);
+        }
+    }
+
     return (
-        <Container title='Ranking'>
+        <Container>
             <div>
                 <h1>{player.username}</h1>
                 <h2>{player.wins}</h2>

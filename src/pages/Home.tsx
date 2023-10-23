@@ -10,7 +10,7 @@ export function Home(): JSX.Element {
     }
 
     return (
-        <Container title='Home'>
+        <Container>
             <NewPlayerForm onNewPlayer={handleSubmitNewPlayer} />
         </Container>
     )

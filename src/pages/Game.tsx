@@ -45,7 +45,11 @@ export function Game(): JSX.Element {
     }
 
     return (
-        <Container title='Game' alert={alert} openAlert={openWinnerAlert} alertOnClose={restartGame} >
+        <Container
+            alert={alert}
+            openAlert={openWinnerAlert}
+            alertOnClose={restartGame}
+        >
             <Board
                 key={game.id}
                 onClickSquare={handleClickSquare}
