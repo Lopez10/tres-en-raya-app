@@ -4,11 +4,9 @@ import { Square } from "./Square";
 export function Board({
     onClickSquare,
     squaresBoard = Array(9).fill(''),
-    disabled = false
 }: {
     onClickSquare: (board: string[]) => Promise<string[]>;
     squaresBoard?: Array<string>;
-    disabled?: boolean;
 }): JSX.Element {
     const [squares, setSquares] = useState(squaresBoard);
 
@@ -34,7 +32,7 @@ export function Board({
                         key={index}
                         children={square}
                         onClick={() => handleClick(index)}
-                        disabled={square !== '' || disabled}
+                        disabled={square !== ''}
                     />
                 ))
             }

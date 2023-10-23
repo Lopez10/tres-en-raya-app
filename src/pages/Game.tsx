@@ -7,28 +7,26 @@ import { getPlayer } from "../storage";
 export function Game(): JSX.Element {
     const [game, setGame] = useState<IGame>(emptyGame);
     const [alert, setAlert] = useState<string>('');
-    const [disabled, setDisabled] = useState<boolean>(false);
-    const [closeWinner, setCloseWinner] = useState<boolean>(false);
+    const [openWinnerAlert, setOpenWinnerAlert] = useState<boolean>(false);
 
     useEffect(() => {
-        async function fetchGame() {
-            const player = getPlayer();
-            if (player) {
-                const gameCreated: IGame = await createGame(player.id);
-                setGame(gameCreated);
-            }
-            setCloseWinner(false);
-        }
-
         fetchGame();
-    }, [closeWinner]);
+    }, []);
 
     useEffect(() => {
         if (game.winner) {
-            setDisabled(true);
             setAlert(`${game.winner} won!`);
+            setOpenWinnerAlert(true);
         }
     }, [game.winner]);
+
+    async function fetchGame() {
+        const player = getPlayer();
+        if (player) {
+            const gameCreated: IGame = await createGame(player.id);
+            setGame(gameCreated);
+        }
+    }
 
     async function handleClickSquare(board: string[]): Promise<string[]> {
         const gameUpdated = await moveBoard({
@@ -42,16 +40,14 @@ export function Game(): JSX.Element {
     }
 
     function restartGame() {
-        setCloseWinner(true);
-        setDisabled(false);
-        setAlert('')
+        setOpenWinnerAlert(false);
+        fetchGame();
     }
 
     return (
-        <Container title='Game' alert={alert} alertOnClose={restartGame} >
+        <Container title='Game' alert={alert} openAlert={openWinnerAlert} alertOnClose={restartGame} >
             <Board
                 key={game.id}
-                disabled={disabled}
                 onClickSquare={handleClickSquare}
                 squaresBoard={game.board}
             />
