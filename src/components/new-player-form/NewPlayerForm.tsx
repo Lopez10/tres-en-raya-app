@@ -32,9 +32,9 @@ export function NewPlayerForm({
                 value={username}
                 onChange={handleUsername}
                 required={true}
-                placeholder="Escribe aquí tu nombre de usuario"
+                placeholder="Write here your username"
                 inputStyle={inputStyle}
-                label="¿Cual es tu nombre de usuario?"
+                label="What is your username?"
                 labelStyle={labelStyle}
             />
         </Form>
