@@ -14,11 +14,12 @@ export function Game(): JSX.Element {
     }, []);
 
     useEffect(() => {
-        if (game.winner) {
-            setAlert(`${game.winner} won!`);
+        setAlert(getGameResult());
+
+        if (game.status === 'FINISHED') {
             setOpenWinnerAlert(true);
         }
-    }, [game.winner]);
+    }, [game.status, game.winner]);
 
     async function fetchGame() {
         const player = getPlayer();
@@ -42,6 +43,14 @@ export function Game(): JSX.Element {
     function restartGame() {
         setOpenWinnerAlert(false);
         fetchGame();
+    }
+
+    function getGameResult() {
+        if (game.winner) {
+            return `${game.winner} is the winner!`;
+        }
+
+        return 'Draw!';
     }
 
     return (
