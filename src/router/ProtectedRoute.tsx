@@ -1,16 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useLocalStorage } from 'react-use'
 
 export const ProtectedRoute = ({
-    isAllowed,
-    redirectTo = "/landing",
     children,
 }: {
-    isAllowed: boolean,
-    redirectTo: string,
     children: JSX.Element
 }) => {
-    if (!isAllowed) {
-        return <Navigate to={redirectTo} replace />;
+    const [player] = useLocalStorage('player');
+
+    if (!player) {
+        return <Navigate to={'/'} replace />;
     }
 
     return children ? children : <Outlet />;
