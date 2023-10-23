@@ -14,9 +14,12 @@ export function Game(): JSX.Element {
     }, []);
 
     useEffect(() => {
-        setAlert(getGameResult());
-
         if (game.status === 'FINISHED') {
+            if (game.winner) {
+                setAlert(`${game.winner} is the winner!`);
+            } else {
+                setAlert('Draw!');
+            }
             setOpenWinnerAlert(true);
         }
     }, [game.status, game.winner]);
@@ -43,14 +46,6 @@ export function Game(): JSX.Element {
     function restartGame() {
         setOpenWinnerAlert(false);
         fetchGame();
-    }
-
-    function getGameResult() {
-        if (game.winner) {
-            return `${game.winner} is the winner!`;
-        }
-
-        return 'Draw!';
     }
 
     return (
