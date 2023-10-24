@@ -10,7 +10,8 @@ export function Game(): JSX.Element {
     const [openWinnerAlert, setOpenWinnerAlert] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchGame();
+        fetchGame()
+            .catch(console.log)
     }, []);
 
     useEffect(() => {
