@@ -1,26 +1,24 @@
 import { useEffect, useState } from "react";
 import { Container } from "../components/container/Container";
-import { Player, emptyPlayer, newPlayer } from "../services/player";
+import { Player as IPlayer, emptyPlayer, newPlayer } from "../services/player";
 import { getPlayer } from "../storage";
 import { ResultText } from "../components/text/ResultText";
 
 export function Ranking(): JSX.Element {
-    const [player, setPlayer] = useState<Player>(emptyPlayer);
+    const [player, setPlayer] = useState<IPlayer>(emptyPlayer);
 
     useEffect(() => {
-        const playerStorage = getPlayer();
-        if (playerStorage) {
-            fetchPlayer()
-        }
-    }, []);
-
-    async function fetchPlayer() {
-        const player = getPlayer();
-        if (player) {
-            const playerCreated: Player = await newPlayer(player.username);
+        async function fetchPlayer(player: IPlayer) {
+            const playerCreated: IPlayer = await newPlayer(player.username);
             setPlayer(playerCreated);
         }
-    }
+
+        const playerStorage = getPlayer();
+        if (playerStorage) {
+            fetchPlayer(playerStorage)
+                .catch(console.log)
+        }
+    }, []);
 
     return (
         <Container>
